@@ -1,17 +1,24 @@
 export class Task{
     result: string;
 
-    error_message: string;
+    error: string;
+
+    change: boolean;
 
     name: string;
 
-    project: number;
+    project_id: number;
+
+    project_name: string;
 
     id: number;
 
-    priority: string;
+    priority: number;
 
     state: string;
 
     date: Date;
+
+    priority_color: string;
+
 }

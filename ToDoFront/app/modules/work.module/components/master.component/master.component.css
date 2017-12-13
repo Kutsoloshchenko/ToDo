@@ -1,0 +1,37 @@
+user-project{
+    max-width: 300px;
+    margin-left:5px; 
+}
+
+tasks{
+    max-width: 550px;
+}
+
+.columns{
+    display: flex; 
+    width: 100%;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    margin-top: 60px;
+    background:lightgrey
+}
+
+h2 {
+    color: white;
+    background: #77CBFF;
+    border: 1px solid #77CBFF;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.column{
+    display: inline-block;
+    min-width: 25%;
+    margin: 2px;
+    height: 100vh;
+}
+
+#tasks {
+    background:white;
+    min-width: 50%;
+}

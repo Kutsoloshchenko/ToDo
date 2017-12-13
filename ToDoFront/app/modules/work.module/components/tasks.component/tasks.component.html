@@ -1,0 +1,57 @@
+
+<div class="tasks-main">
+<div class="container">
+<div class="tasks">
+    <div class= "buttons">
+        <button (click)="getTasksForToday()">Today</button>
+        <button (click)="getTasksFor7Days()">7 Days</button>
+        <button (click)="getDoneTasks()">Done</button>
+    </div>
+    <div class="task" *ngFor="let task of tasks">
+        <div class="task_overview">
+            <div class=left_side>
+                <label [ngStyle]="{'color':task.priority_color}">&#9650;</label>
+                <label >{{task.name}}</label>
+            </div>
+            <div class=righ_side>
+                <label>{{task.project_name}}</label>
+                <input class="hidden" type="image" src="/assets/images/edit.png" (click)="editTask(task)">
+                <input class="hidden" type="image" src="/assets/images/delete.png" (click)="deleteTask(task)">
+            </div>
+        </div>
+        <div *ngIf="task.change" class="changes">
+            <input class="input-name" type="text" [(ngModel)]="task.name">
+            <select class=priority [(ngModel)]="priority" name="Priority">
+                <option value=1>High</option>
+                <option value=2>Medium</option>
+                <option value=3>Low</option>
+            </select>
+            <select class=status [(ngModel)]="status" name="Status">
+                <option value="Done">Done</option>
+                <option value="In Progress">In Progress</option>
+            </select>
+            <input type="date" [(ngModel)]="date" name="Due Date">
+            <button (click)='changeTask(task, name, priority, status, date)'>Submit</button>
+    </div>
+    </div>
+    <div *ngIf="empty_message" class="empty-message">{{empty_message}}</div>
+    <div class="create">
+        <button *ngIf="showCreate == false" (click)="ShowCreate()">+Add task</button>
+        <div *ngIf="showCreate" class="changes">
+                <input class="input-name" type="text" [(ngModel)]="name" placeholder="Task name">
+                <select class=priority [(ngModel)]="priority" name="Priority">
+                    <option value=1 selected>High</option>
+                    <option value=2>Medium</option>
+                    <option value=3>Low</option>
+                </select>
+                <select class=project [(ngModel)]="project" name="Project">
+                    <option *ngFor="let project of projects" value={{project.id}}>{{project.name}}</option>
+                </select>
+                <input type="date" [(ngModel)]="date" name="Due Date">
+                <button (click)='createTask(name, priority, project, date)'>Submit</button>
+        </div>
+    </div>
+    <div *ngIf="error_message" class="error">{{error_message}}</div>
+</div>
+</div>
+</div>

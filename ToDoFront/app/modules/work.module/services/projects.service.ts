@@ -23,32 +23,33 @@ export class ProjectService{
                        token: token})
         
         return this.http
-                   .post(this.restAPILink+"/get_albums/", body)
+                   .post(this.restAPILink+"/get_projects/", body)
                    .toPromise()
                    .then(result => result.json() as Project[])
 
     }
 
-    public DeleteProject(username: string, token: string, folder_name: string): Promise<Project> {
+    public DeleteProject(username: string, token: string, id: number): Promise<Project> {
         const body = ({username: username,
                        token: token,
-                       folder_name: folder_name})
+                       id: id})
         
         return this.http
-                   .post(this.restAPILink+"/delete_album/", body)
+                   .post(this.restAPILink+"/delete_project/", body)
                    .toPromise()
                    .then(result => result.json() as Project)
 
     }
 
-    public ChangeUserProject(username: string, token: string, folder_name: string, new_name: string): Promise<Project> {
+    public ChangeUserProject(username: string, token: string, name: string, color: string, id: number): Promise<Project> {
         const body = ({username: username,
                        token: token,
-                       folder_name: folder_name,
-                       new_name: new_name})
+                       name: name,
+                       color: color,
+                       id: id})
         
         return this.http
-                   .post(this.restAPILink+"/change_album_name/", body)
+                   .post(this.restAPILink+"/change_project/", body)
                    .toPromise()
                    .then(result => result.json() as Project)
 

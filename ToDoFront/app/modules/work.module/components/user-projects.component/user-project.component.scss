@@ -1,0 +1,40 @@
+.projects-main {
+    display: flex;
+    justify-content: center;
+    font-size:24px; 
+}
+
+.projects {
+    font-size: 24px;
+}
+
+.project{
+    .hidden {
+        visibility: hidden;
+    }
+}
+
+.project:hover{
+
+    
+
+    .hidden {
+        visibility: visible;
+        cursor: pointer;
+    }
+
+    .name {
+        background: #C9EBFF;
+        cursor: pointer;
+    }
+}
+
+.color {
+    background-image: none;
+    background: none;
+    -webkit-appearance: none;
+    border: 1px;
+    max-width: 20px;
+    border-radius: 10%;
+    cursor: pointer;
+}

@@ -1,18 +1,30 @@
-<div class="user_component">
-    <div class="create_album">
-        <label>Create Album</label> 
-        <input [(ngModel)]="create_album_name" placeholder="Album name">
-        <button (click)="CreateAlbum()">Create</button>
-    </div>
 
-    <div *ngIf="albums">
-        <div class="albums" *ngFor="let album of albums">
-                <label>{{album.name}}</label> 
-                <button (click)="CreateAlbum()">View</button>
-                <button (click)="deleteFolder(album.name)">Delete</button>
-                <input [(ngModel)]="album.change_name" placeholder="Rename">
-                <button (click)="changeFolderName(album.name, album.change_name)">Rename</button>
+<div class="projects-main">
+<div>
+<div class="projects">
+    <div class="project" *ngFor="let project of projects">
+        <div class="project_overview">
+            <label [ngStyle]="{'color':project.color}">&#9632;</label>
+            <label class="name" (click)="getProjectTasks(project)">{{project.name}}</label>
+            <input class="hidden" type="image" src="/assets/images/edit.png" (click)="editProject(project)">
+            <input class="hidden" type="image" src="/assets/images/delete.png" (click)="deleteProject(project)">
+        </div>
+        <div *ngIf="project.changes" class="changes">
+                <input class="color" type="color" [(ngModel)]="color">
+                <input class="input-name" type="text" [(ngModel)]="project.name" placeholder="Project name">
+                <button (click)='changeProjectName(project ,project.name, color)'>Submit</button>
         </div>
     </div>
-
+    <div *ngIf="empty_message" class="empty-message">{{empty_message}}</div>
 </div>
+<div class="create">
+    <button *ngIf="showCreate == false" (click)="ShowCreate()">+Add project</button>
+    <div *ngIf="showCreate" class="changes">
+            <input class="color" type="color" [(ngModel)]="color">
+            <input class="input-name" type="text" [(ngModel)]="name" placeholder="Project name">
+            <button (click)='CreateProject(name, color)'>Submit</button>
+    </div>
+    <div *ngIf="error_message" class="error">{{error_message}}</div>
+</div>
+</div>
+</div>    

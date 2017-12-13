@@ -8,7 +8,7 @@ import { Component } from "@angular/core";
     styleUrls: ["./main-auth.component.css"]
 })
 export class MainAuthComponent {
-    what_to_show: string = "sign_up";
+    what_to_show: string = "sign_in";
 
     switch_to_show(name : string): void {
         this.what_to_show = name;

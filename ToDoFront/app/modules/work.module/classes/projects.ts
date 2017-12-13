@@ -2,7 +2,9 @@
 export class Project{
     result: string;
 
-    error_message: string;
+    error: string;
+
+    changes: boolean = false;
 
     name: string;
 

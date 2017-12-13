@@ -1,0 +1,43 @@
+.tasks-main {
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.container{
+    min-width: 600px;
+}
+
+.tasks {
+    margin-top : 10%;
+}
+
+.task{
+    .hidden {
+        visibility: hidden;
+    }
+}
+
+.task:hover{
+    .hidden {
+        visibility: visible;
+    }
+}
+
+.task_overview {
+    max-width: inherit;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+.tasks {
+    max-width: inherit;
+}
+.buttons {
+    max-width: inherit;
+
+    button{
+        min-width: 32%;
+        font-size: 24px;
+    }
+}

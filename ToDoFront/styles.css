@@ -1,0 +1,50 @@
+button {
+    
+        margin: 10px auto 10px;
+        background-color: #77CBFF;
+        color: white;
+        border: 1px solid #77CBFF;
+        border-radius: 4px;
+        text-align: center;
+        background-image: none;
+        -webkit-appearance: none;
+    
+    }
+    
+button:hover {
+        
+        background: #C9EBFF;
+        cursor: pointer;
+    }
+
+.input-name {
+    max-height: 25px;
+    max-width: 175px;
+    border: none;
+
+}
+
+input {
+    border: none;
+}
+
+select{
+    border: none;
+}
+
+.changes {
+    max-width: inherit;
+    border-bottom: 1px solid black;
+    font-size: inherit;
+}
+
+.create {
+    margin: inherit;
+    max-width: inherit;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    font-style: italic;
+}

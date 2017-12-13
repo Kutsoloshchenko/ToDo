@@ -5,20 +5,27 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from "@angular/http";
 import { FormsModule} from '@angular/forms';
 
-import { AlbumRouterModule } from "./modules/album-router.module"
-import { UserFolderComponent } from "./components/user-folder.component/user-folder.component"
-import { AlbumService } from './services/album.service';
+import { ProjectRouterModule } from "./modules/project-router.module"
+import { UserProjectComponent } from "./components/user-projects.component/user-project.component"
+import { MasterComponent } from "./components/master.component/master.component"
+import { TasksComponent } from "./components/tasks.component/tasks.component"
+import { ProjectService } from './services/projects.service';
+import { TaskService } from './services/tasks.service';
 
 @NgModule({
     declarations: [
-      UserFolderComponent      
+      UserProjectComponent,
+      TasksComponent,
+      MasterComponent      
       ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
-        AlbumRouterModule
+        ProjectRouterModule
       ],
-    providers: [AlbumService],
+    providers: [
+      ProjectService,
+      TaskService],
 })
-export class AlbumsModule{}
+export class WorkModule{}

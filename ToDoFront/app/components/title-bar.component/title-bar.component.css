@@ -46,9 +46,9 @@
 
 .container {
     position: fixed;
-    top: 5px;
-    left: 5px;
-    right: 2px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
     margin: 0, 5px;
     background-color: #77CBFF;
     color: white;
