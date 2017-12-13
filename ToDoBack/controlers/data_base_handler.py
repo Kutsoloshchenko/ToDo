@@ -1,12 +1,17 @@
 """Class that incapsulates work with data base and add layer of abstraction """
 
 from rest_api.models import User, Project, Task
+from rest_api.serializer import UserSerializer, ProjectSerializer, TaskSerializer
 
 class DataBaseHandler:
 
     _ALIASES = {"users": User,
-               "projects": Project,
-               "tasks": Task}
+                "projects": Project,
+                "tasks": Task}
+
+    _SERIALIZERS = {"users": UserSerializer,
+                    "projects": ProjectSerializer,
+                    "tasks": TaskSerializer}
 
     def add_entry(self, alias, dict):
         new_entry = self._ALIASES[alias](**dict)
@@ -17,6 +22,8 @@ class DataBaseHandler:
 
     def update_entry(self, alias, upd_dict, search_dict):
         entry = self._ALIASES[alias].objects.filter(**search_dict).first()
+
+        print(self._SERIALIZERS[alias](entry).data)
 
         for key in upd_dict:
             setattr(entry, key, upd_dict[key])
@@ -42,12 +49,10 @@ class DataBaseHandler:
         else:
             return None, None
 
-    def get_entrys_attributes(self, alias, dict, attributes):
-        entrys = self._ALIASES[alias].objects.filter(**dict)
+    def get_entries(self, alias, dict):
+        entries = self._ALIASES[alias].objects.filter(**dict)
 
-        iter_object = [(entry, attributes) for entry in entrys]
-
-        if entrys:
-            return [[getattr(iter[0], atribute) for atribute in attributes] for iter in iter_object]
+        if entries:
+            return [self._SERIALIZERS[alias](entry).data for entry in entries]
         else:
             return None

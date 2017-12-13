@@ -49,7 +49,7 @@ def create_project(request):
     if request.method == 'GET':
         data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImpvaG4gZG9lIiwiaWQiOjF9.SWi5pYoCM6I0DBsCTXS6POZlWR4sOMI7GovWBDedvCk",
                 "username": "john doe",
-                "name": "newShit2",
+                "name": "newShit25",
                 "color": "FFBF7F"}
 
     elif request.method == 'POST':
@@ -62,16 +62,69 @@ def create_project(request):
 
 
 @api_view(['POST', "GET"])
+def change_project(request):
+
+    if request.method == 'GET':
+        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImpvaG4gZG9lIiwiaWQiOjF9.SWi5pYoCM6I0DBsCTXS6POZlWR4sOMI7GovWBDedvCk",
+                "username": "john doe",
+                "id": 1,
+                "name": "newShit3",
+                "color": "FFBF7R"}
+
+    elif request.method == 'POST':
+        data = request.data
+
+    """Process of signing in"""
+
+    print(data)
+
+    result = mod.change_project(data)
+    return Response(result)
+
+
+@api_view(['POST', "GET"])
+def delete_project(request):
+
+    if request.method == 'GET':
+        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImpvaG4gZG9lIiwiaWQiOjF9.SWi5pYoCM6I0DBsCTXS6POZlWR4sOMI7GovWBDedvCk",
+                "username": "john doe",
+                "id": 2}
+
+    elif request.method == 'POST':
+        data = request.data
+
+    """Process of signing in"""
+    result = mod.delete_project(data)
+    return Response(result)
+
+
+@api_view(['POST', "GET"])
+def get_projects(request):
+
+    if request.method == 'GET':
+        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImpvaG4gZG9lIiwiaWQiOjF9.SWi5pYoCM6I0DBsCTXS6POZlWR4sOMI7GovWBDedvCk",
+                "username": "john doe"}
+
+    elif request.method == 'POST':
+        data = request.data
+
+    """Process of signing in"""
+
+    result = mod.get_projects(data)
+    return Response(result)
+
+
+@api_view(['POST', "GET"])
 def create_task(request):
 
     if request.method == 'GET':
         data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImpvaG4gZG9lIiwiaWQiOjF9.SWi5pYoCM6I0DBsCTXS6POZlWR4sOMI7GovWBDedvCk",
                 "username": "john doe",
                 "project": 1,
-                "name": "task1",
-                "state": "In Progress",
-                "priority": "Hight",
-                "due_date": date(day=6, year=2017, month=7)}
+                "name": "Guerrillas",
+                "state": "Done",
+                "priority": 1,
+                "due_date": date(day=13, year=2017, month=12)}
 
     elif request.method == 'POST':
         data = request.data
@@ -82,144 +135,105 @@ def create_task(request):
     return Response(result)
 
 
-
 @api_view(['POST', "GET"])
-def create_file(request):
+def get_tasks_for_today(request):
 
     if request.method == 'GET':
-
-        with open("D:\off_work_activity\Slice at depth 610.png", "rb", ) as file:
-            u = file.read()
-
-        image_dict = {"name": "img.png",
-                      "description": "guerrilla shit and stuff",
-                      "date": "now",
-                      "file": u}
-
-        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFzZGZ1ayIsImlkIjoyfQ.MB1FGWMIfkfUsSMHZuwuG5_GAs4ItlE1j39QzwYbN1A",
-                "username": "asdfuk",
-                "folder_name": "newShit",
-                "image_dict": image_dict}
+        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImpvaG4gZG9lIiwiaWQiOjF9.SWi5pYoCM6I0DBsCTXS6POZlWR4sOMI7GovWBDedvCk",
+                "username": "john doe"}
 
     elif request.method == 'POST':
         data = request.data
 
     """Process of signing in"""
 
-    result = mod.create_file(data["token"], data["username"], data["folder_name"], data["image_dict"])
+    result = mod.get_tasks_for_today(data)
+
     return Response(result)
 
 
 @api_view(['POST', "GET"])
-def get_albums(request):
+def get_tasks_for_7_days(request):
 
     if request.method == 'GET':
-
-        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InRlc29uZSIsImlkIjo1fQ.W2nU_m6WdGoJI9WGqYS0jn2PQuIqkVEqr0iYSl_qE-A",
-                "username": "tesone"}
+        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImpvaG4gZG9lIiwiaWQiOjF9.SWi5pYoCM6I0DBsCTXS6POZlWR4sOMI7GovWBDedvCk",
+                "username": "john doe"}
 
     elif request.method == 'POST':
         data = request.data
 
     """Process of signing in"""
 
-    result = mod.get_albums(data["token"], data["username"])
+    result = mod.get_tasks_for_7_days(data)
     return Response(result)
 
 
 @api_view(['POST', "GET"])
-def get_files_in_album(request):
+def get_tasks_for_project(request):
 
     if request.method == 'GET':
-
-        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFzZGZ1ayIsImlkIjoyfQ.MB1FGWMIfkfUsSMHZuwuG5_GAs4ItlE1j39QzwYbN1A",
-                "username": "asdfuk",
-                "album": "newShit"}
+        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImpvaG4gZG9lIiwiaWQiOjF9.SWi5pYoCM6I0DBsCTXS6POZlWR4sOMI7GovWBDedvCk",
+                "username": "john doe",
+                "project": 4}
 
     elif request.method == 'POST':
         data = request.data
 
     """Process of signing in"""
 
-    result = mod.get_files_in_album(data["token"], data["username"], data["album"])
+    result = mod.get_tasks_for_project(data)
     return Response(result)
 
 
 @api_view(['POST', "GET"])
-def change_album_name(request):
+def get_done_tasks(request):
 
     if request.method == 'GET':
-
-        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFzZGZ1ayIsImlkIjoyfQ.MB1FGWMIfkfUsSMHZuwuG5_GAs4ItlE1j39QzwYbN1A",
-                "username": "asdfuk",
-                "folder_name": "newShit2",
-                "new_name": "newShit2234"}
+        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImpvaG4gZG9lIiwiaWQiOjF9.SWi5pYoCM6I0DBsCTXS6POZlWR4sOMI7GovWBDedvCk",
+                "username": "john doe"}
 
     elif request.method == 'POST':
         data = request.data
 
     """Process of signing in"""
 
-    result = mod.change_album_name(data["token"], data["username"], data["folder_name"], data["new_name"])
+    result = mod.get_done_tasks(data)
     return Response(result)
 
 
 @api_view(['POST', "GET"])
-def change_file_attribute(request):
+def change_task(request):
 
     if request.method == 'GET':
-
-        image_dict = {"name": "img2.png",
-                      "description": "guerrilla just",
-                      "date": "yesterday"}
-
-        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFzZGZ1ayIsImlkIjoyfQ.MB1FGWMIfkfUsSMHZuwuG5_GAs4ItlE1j39QzwYbN1A",
-                "username": "asdfuk",
-                "folder_name": "newShit",
-                "file_name": "img.png",
-                "image_dict": image_dict}
+        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImpvaG4gZG9lIiwiaWQiOjF9.SWi5pYoCM6I0DBsCTXS6POZlWR4sOMI7GovWBDedvCk",
+                "username": "john doe",
+                "project": 4,
+                "id": 8,
+                "name": "newShit89",
+                "state": "Done",
+                "priority": "1"}
 
     elif request.method == 'POST':
         data = request.data
 
     """Process of signing in"""
 
-    result = mod.change_file_attributes(data["token"], data["username"], data["folder_name"], data["file_name"], data["image_dict"])
+    result = mod.change_task(data)
     return Response(result)
 
 
 @api_view(['POST', "GET"])
-def delete_files(request):
+def delete_task(request):
 
     if request.method == 'GET':
-
-        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFzZGZ1ayIsImlkIjoyfQ.MB1FGWMIfkfUsSMHZuwuG5_GAs4ItlE1j39QzwYbN1A",
-                "username": "asdfuk",
-                "folder_name": "newShit",
-                "file_names": "img2.png"
-                }
+        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImpvaG4gZG9lIiwiaWQiOjF9.SWi5pYoCM6I0DBsCTXS6POZlWR4sOMI7GovWBDedvCk",
+                "username": "john doe",
+                "id": 9}
 
     elif request.method == 'POST':
         data = request.data
 
     """Process of signing in"""
 
-    result = mod.delete_files(data["token"], data["username"], data["folder_name"], data["file_names"].split('#'))
-    return Response(result)
-
-
-@api_view(['POST', "GET"])
-def delete_album(request):
-
-    if request.method == 'GET':
-        data = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFzZGZ1ayIsImlkIjoyfQ.MB1FGWMIfkfUsSMHZuwuG5_GAs4ItlE1j39QzwYbN1A",
-                "username": "asdfuk",
-                "folder_name": "newShit2"}
-
-    elif request.method == 'POST':
-        data = request.data
-
-    """Process of signing in"""
-
-    result = mod.delete_album(data["token"], data["username"], data["folder_name"])
+    result = mod.delete_task(data)
     return Response(result)

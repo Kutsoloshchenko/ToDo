@@ -73,6 +73,8 @@ class Model():
 
         return response
 
+    # Project handler functions
+
     def create_project(self, data):
 
         owner_id = self._validate_token(data.pop('token'), data.pop('username'))
@@ -87,13 +89,135 @@ class Model():
 
         return response
 
+    def change_project(self, data):
+        owner_id = self._validate_token(data.pop('token'), data.pop('username'))
+
+        if owner_id:
+            # is provided user name and user id is same as in decoded token that verification is successful
+            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            response = self._project_handler.change_project(data)
+
+        else:
+            response = {"result": 'Fail', "error": 'Auth error'}
+
+        return response
+
+    def delete_project(self, data):
+        owner_id = self._validate_token(data.pop('token'), data.pop('username'))
+
+        if owner_id:
+            # is provided user name and user id is same as in decoded token that verification is successful
+            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            response = self._project_handler.delete_project(data)
+
+        else:
+            response = {"result": 'Fail', "error": 'Auth error'}
+
+        return response
+
+    def get_projects(self, data):
+        owner_id = self._validate_token(data.pop('token'), data.pop('username'))
+
+        if owner_id:
+            # is provided user name and user id is same as in decoded token that verification is successful
+            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            response = self._project_handler.get_projects(data)
+
+        else:
+            response = {"result": 'Fail', "error": 'Auth error'}
+
+        return response
+
+    # Task handler functions
 
     def create_task(self, data):
 
-        if self._validate_token(data.pop('token'), data.pop('username')):
+        owner_id = self._validate_token(data.pop('token'), data.pop('username'))
+
+        if owner_id:
             # is provided user name and user id is same as in decoded token that verification is successful
             data["project"] = self._db.get_entry("projects", {"id": data['project']})
+            data["owner"] = self._db.get_entry("users", {"id": owner_id})
             response = self._project_handler.create_task(data)
+
+        else:
+            response = {"result": 'Fail', "error": 'Auth error'}
+
+        return response
+
+    def get_tasks_for_today(self, data):
+        owner_id = self._validate_token(data.pop('token'), data.pop('username'))
+
+        if owner_id:
+            # is provided user name and user id is same as in decoded token that verification is successful
+            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            response = self._project_handler.get_tasks_for_today(data)
+
+        else:
+            response = {"result": 'Fail', "error": 'Auth error'}
+
+        return response
+
+    def get_tasks_for_project(self, data):
+        owner_id = self._validate_token(data.pop('token'), data.pop('username'))
+
+        if owner_id:
+            # is provided user name and user id is same as in decoded token that verification is successful
+            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            response = self._project_handler.get_tasks_for_project(data)
+
+        else:
+            response = {"result": 'Fail', "error": 'Auth error'}
+
+        return response
+
+    def get_tasks_for_7_days(self, data):
+        owner_id = self._validate_token(data.pop('token'), data.pop('username'))
+
+        if owner_id:
+            # is provided user name and user id is same as in decoded token that verification is successful
+            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            response = self._project_handler.get_tasks_for_7_days(data)
+
+        else:
+            response = {"result": 'Fail', "error": 'Auth error'}
+
+        return response
+
+    def get_done_tasks(self, data):
+        owner_id = self._validate_token(data.pop('token'), data.pop('username'))
+
+        if owner_id:
+            # is provided user name and user id is same as in decoded token that verification is successful
+            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            response = self._project_handler.get_done_tasks(data)
+
+        else:
+            response = {"result": 'Fail', "error": 'Auth error'}
+
+        return response
+
+    def delete_task(self, data):
+        owner_id = self._validate_token(data.pop('token'), data.pop('username'))
+
+        if owner_id:
+            # is provided user name and user id is same as in decoded token that verification is successful
+            response = self._project_handler.delete_task(data)
+
+        else:
+            response = {"result": 'Fail', "error": 'Auth error'}
+
+        return response
+
+    def change_task(self, data):
+
+        owner_id = self._validate_token(data.pop('token'), data.pop('username'))
+
+        if owner_id:
+            # is provided user name and user id is same as in decoded token that verification is successful
+            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            data["project"] = self._db.get_entry("projects", {"id": data['project']})
+            response = self._project_handler.change_task(data)
 
         else:
             response = {"result": 'Fail', "error": 'Auth error'}

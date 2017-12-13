@@ -21,10 +21,11 @@ class Project(models.Model):
 
 class Task(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=25)
-    state = models.CharField(max_length=25)
+    state = models.CharField(max_length=25, default="In Progress")
     due_date = models.DateField(auto_now=False, auto_now_add=False)
-    priority = models.CharField(max_length=25)
+    priority = models.IntegerField()
 
     class Meta:
         ordering = ('id',)
