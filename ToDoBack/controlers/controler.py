@@ -79,7 +79,7 @@ class Controler():
 
         response = self._validator.sign_in(email.lower(), password)
         if response["result"] == "Ok":
-            entry = self._db.get_entry('users', {"email": email})
+            entry = self._db.get_entry('users', {"email": email.lower()})
 
             if entry:
                 response["token"] = self._jwt_token_creator.create_token(entry["username"], entry["id"])
@@ -110,7 +110,7 @@ class Controler():
 
         if owner_id:
             # if provided user name and user id is same as in decoded token that verification is successful
-            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            data["owner"] = self._db.get_entry("users", {"id": owner_id}, True)
             response = self._project_handler.create_project(data)
 
         else:
@@ -136,7 +136,7 @@ class Controler():
 
         if owner_id:
             # if provided user name and user id is same as in decoded token that verification is successful
-            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            data["owner"] = self._db.get_entry("users", {"id": owner_id}, True)
             response = self._project_handler.change_project(data)
 
         else:
@@ -162,7 +162,7 @@ class Controler():
 
         if owner_id:
             # if provided user name and user id is same as in decoded token that verification is successful
-            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            data["owner"] = self._db.get_entry("users", {"id": owner_id}, True)
             response = self._project_handler.delete_project(data)
 
         else:
@@ -189,7 +189,7 @@ class Controler():
 
         if owner_id:
             # is provided user name and user id is same as in decoded token that verification is successful
-            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            data["owner"] = self._db.get_entry("users", {"id": owner_id}, True)
             response = self._project_handler.get_projects(data)
 
         else:
@@ -218,8 +218,8 @@ class Controler():
 
         if owner_id:
             # if provided user name and user id is same as in decoded token that verification is successful
-            data["project"] = self._db.get_entry("projects", {"id": data['project']})
-            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            data["project"] = self._db.get_entry("projects", {"id": data['project']}, True)
+            data["owner"] = self._db.get_entry("users", {"id": owner_id}, True)
             response = self._project_handler.create_task(data)
 
         else:
@@ -245,7 +245,7 @@ class Controler():
 
         if owner_id:
             # if provided user name and user id is same as in decoded token that verification is successful
-            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            data["owner"] = self._db.get_entry("users", {"id": owner_id}, True)
             response = self._project_handler.get_tasks_for_today(data)
 
         else:
@@ -271,7 +271,7 @@ class Controler():
 
         if owner_id:
             # is provided user name and user id is same as in decoded token that verification is successful
-            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            data["owner"] = self._db.get_entry("users", {"id": owner_id}, True)
             response = self._project_handler.get_tasks_for_project(data)
 
         else:
@@ -297,7 +297,7 @@ class Controler():
 
         if owner_id:
             # if provided user name and user id is same as in decoded token that verification is successful
-            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            data["owner"] = self._db.get_entry("users", {"id": owner_id}, True)
             response = self._project_handler.get_tasks_for_7_days(data)
 
         else:
@@ -323,7 +323,7 @@ class Controler():
 
         if owner_id:
             # if provided user name and user id is same as in decoded token that verification is successful
-            data["owner"] = self._db.get_entry("users", {"id": owner_id})
+            data["owner"] = self._db.get_entry("users", {"id": owner_id}, True)
             response = self._project_handler.get_done_tasks(data)
 
         else:
@@ -375,8 +375,8 @@ class Controler():
 
         if owner_id:
             # if provided user name and user id is same as in decoded token that verification is successful
-            data["owner"] = self._db.get_entry("users", {"id": owner_id})
-            data["project"] = self._db.get_entry("projects", {"id": data['project']})
+            data["owner"] = self._db.get_entry("users", {"id": owner_id}, True)
+            data["project"] = self._db.get_entry("projects", {"id": data['project']}, True)
             response = self._project_handler.change_task(data)
 
         else:

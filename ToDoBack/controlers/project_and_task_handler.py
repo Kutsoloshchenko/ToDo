@@ -167,11 +167,12 @@ class ProjectAndTaskHandler:
 
         tasks = self._get_multiple_items("tasks", search_dict)
 
-        tasks = [task for task in tasks if
-                 (datetime.strptime(task['due_date'],  "%Y-%m-%d").date() - date.today() <= timedelta(7) and
-                  datetime.strptime(task['due_date'], "%Y-%m-%d").date() - date.today() >= timedelta(0))]
-
         if tasks:
+
+            tasks = [task for task in tasks if
+                     (datetime.strptime(task['due_date'], "%Y-%m-%d").date() - date.today() <= timedelta(7) and
+                      datetime.strptime(task['due_date'], "%Y-%m-%d").date() - date.today() >= timedelta(0))]
+
             return self._sort_tasks_by_state_and_due_date(tasks)
         else:
             return {}
@@ -251,7 +252,7 @@ class ProjectAndTaskHandler:
         return_list = tasks_upper + tasks
 
         for task in return_list:
-            task['project_name'] = self._db.get_entry("projects", {"id": task["project_id"]}).name
+            task['project_name'] = self._db.get_entry("projects", {"id": task["project_id"]})["name"]
 
         return return_list
 
@@ -336,7 +337,7 @@ class ProjectAndTaskHandler:
             return {"result": "Fail", "error": "Name contains invalid characters"}
         elif fullmatch and self._db.contains(db_alias, validate_dict):
             if id:
-                if self._db.get_entry(db_alias, {'id': id}).name == name:
+                if self._db.get_entry(db_alias, {'id': id})["name"] == name:
                     return {"result": "Ok"}
             return {"result": "Fail", "error": "Item with specified name already exists"}
         else:

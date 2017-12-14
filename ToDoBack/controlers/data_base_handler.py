@@ -72,43 +72,24 @@ class DataBaseHandler:
         else:
             return False
 
-    def get_entry(self, alias, dict):
+    def get_entry(self, alias, dict, asEntry=False):
         """ Gets and returns single entry from data base
 
             Params:
                     alias - name of the table
                     dict - number of parameters by which entries are filtered by
+                    asEntry - specific how user should receive response
 
             Returns:
                     Dictionary of entries attributes
+                    or Entry itself
         """
 
         entry = self._ALIASES[alias].objects.filter(**dict).first()
-        return self._SERIALIZERS[alias](entry).data
-
-    def get_entry_attributes(self, alias, dict, attributes):
-        """ Function returns list of attributes of specified data base entry
-
-            Params:
-                    alias - name of the table
-                    dict - number of parameters that entries are filtered by
-                    attributes - names of attributes that will be returned
-
-            Returns:
-                    List of desired attributes
-                    List of two None
-
-            Important note:
-                    This function is used only to retried information for sign up and sign in related functions
-                    This is legacy code, and should be redone with using get_entry with serializer
-        """
-
-        entry = self.get_entry(alias, dict)
-
-        if entry:
-            return [getattr(entry, attribute) for attribute in attributes]
+        if asEntry:
+            return entry
         else:
-            return None, None
+            return self._SERIALIZERS[alias](entry).data
 
     def get_entries(self, alias, dict):
         """ Function that returns list of data base entries that are filtered by input dictionary.
