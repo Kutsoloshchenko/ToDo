@@ -1,3 +1,5 @@
+"""Modules with urls for rest api functions"""
+
 from django.conf.urls import url
 from rest_api import views
 

@@ -79,8 +79,8 @@ class Validator:
 
          """
 
-        email, psw = self._DB.get_entry_attributes('users', {"email": email}, ("email", "password"))
-        if not email or not hash.verify(password, psw):
+        entry = self._DB.get_entry('users', {"email": email})
+        if not entry['email'] or not hash.verify(password, entry['password']):
             return {"result": "Fail", "password_error": "Username or password are not correct"}
         else:
             return {"result": "Ok"}
