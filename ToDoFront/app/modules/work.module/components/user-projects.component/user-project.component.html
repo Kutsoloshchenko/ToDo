@@ -23,6 +23,7 @@
             <input class="color" type="color" [(ngModel)]="color">
             <input class="input-name" type="text" [(ngModel)]="name" placeholder="Project name">
             <button (click)='CreateProject(name, color)'>Submit</button>
+            <button (click)='Cancel()'>Cancel</button>
     </div>
     <div *ngIf="error_message" class="error">{{error_message}}</div>
 </div>

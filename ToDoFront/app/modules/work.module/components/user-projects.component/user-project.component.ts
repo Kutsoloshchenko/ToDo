@@ -47,6 +47,11 @@ export class UserProjectComponent implements OnInit {
 
             }
 
+    reloadMessages(): void {
+                this.empty_message = null;
+                this.error_message = null;
+            }
+
     getProjects(): void{
 
         this.projectService.GetUserProjects(this.username, this.jwtAuth.getToken())
@@ -55,6 +60,7 @@ export class UserProjectComponent implements OnInit {
             {
             this.projects = server_responce;
             this.tasksref.getNewProjects(this.projects)
+            this.reloadMessages()
             }
             else
             {
@@ -71,6 +77,7 @@ export class UserProjectComponent implements OnInit {
                              if (server_responce.result == "Ok")
                              {
                                 this.getProjects()
+                                this.reloadMessages()
                              }
                              else {
                                 this.error_message = server_responce.error
@@ -84,6 +91,7 @@ export class UserProjectComponent implements OnInit {
                                      if (server_responce.result == "Ok")
                                      {
                                         this.getProjects()
+                                        this.reloadMessages()
                                      }
                                      else {
                                          this.error_message = server_responce.error
@@ -99,6 +107,7 @@ export class UserProjectComponent implements OnInit {
                                              {
                                                 this.getProjects()
                                                 this.showCreate = false;
+                                                this.reloadMessages()
                                              }
                                              else {
                                                 this.error_message = server_responce.error
@@ -112,6 +121,11 @@ export class UserProjectComponent implements OnInit {
 
     ShowCreate(): void{
         this.showCreate = true;
+    }
+
+    
+    Cancel(): void {
+        this.showCreate = false;
     }
 
     editProject(project: Project): void {

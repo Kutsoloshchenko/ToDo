@@ -31,7 +31,7 @@
                 <option value="In Progress">In Progress</option>
             </select>
             <input type="date" [(ngModel)]="date" name="Due Date">
-            <button (click)='changeTask(task, name, priority, status, date)'>Submit</button>
+            <button (click)='changeTask(task, priority, status, date)'>Submit</button>
     </div>
     </div>
     <div *ngIf="empty_message" class="empty-message">{{empty_message}}</div>
@@ -49,6 +49,7 @@
                 </select>
                 <input type="date" [(ngModel)]="date" name="Due Date">
                 <button (click)='createTask(name, priority, project, date)'>Submit</button>
+                <button (click)='Cancel()'>Cancel</button>
         </div>
     </div>
     <div *ngIf="error_message" class="error">{{error_message}}</div>

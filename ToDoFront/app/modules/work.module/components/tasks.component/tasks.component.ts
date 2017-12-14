@@ -43,23 +43,30 @@ export class TasksComponent implements OnInit {
 
                 this.getTasksForToday();
                 this.showCreate = false;
-                console.log(this.tasks)
 
             }
+
+    reloadMessages(): void {
+        this.empty_message = null;
+        this.error_message = null;
+    }
 
     getTasksForToday(): void{
 
         this.taskService.GetTodayTasks(this.username, this.jwtAuth.getToken())
         .then(server_responce => 
-         { if (server_responce[0].name != undefined)
+         { 
+             if (server_responce[0]!= undefined)
             {
             this.tasks = server_responce;
             this.tasks.forEach(task => {
                                 this.getPriorotiColor(task)
                                         })
+            this.reloadMessages()
             }
         else
             {
+                this.tasks = [];
                 this.empty_message = "No items for today!"
             }
           
@@ -70,12 +77,13 @@ export class TasksComponent implements OnInit {
             
          this.taskService.Get7DaysTasks(this.username, this.jwtAuth.getToken())
         .then(server_responce => 
-            { if (server_responce[0].name != undefined)
+            { if (server_responce[0] != undefined)
                 {
                 this.tasks = server_responce;
                 this.tasks.forEach(task => {
                                     this.getPriorotiColor(task)
                                             })
+                this.reloadMessages()
                 }
             else
                 {
@@ -96,6 +104,8 @@ export class TasksComponent implements OnInit {
                 this.tasks.forEach(task => {
                                     this.getPriorotiColor(task)
                                             })
+                this.reloadMessages()
+                
                 }
             else
                 {
@@ -117,6 +127,7 @@ export class TasksComponent implements OnInit {
             this.tasks.forEach(task => {
                                 this.getPriorotiColor(task)
                                         })
+            this.reloadMessages()
             }
             else
             {
@@ -129,15 +140,14 @@ export class TasksComponent implements OnInit {
 
 
 
-    changeTask(task: Task, name: string, priority: number, state: string, due_date: Date): void{
+    changeTask(task: Task, priority: number, state: string, due_date: Date): void{
 
-        console.log(task.project_id)
-
-        this.taskService.ChangeTask(this.username, this.jwtAuth.getToken(), name, priority, due_date, state, task.id, task.project_id)
+        this.taskService.ChangeTask(this.username, this.jwtAuth.getToken(), task.name, priority, due_date, state, task.id, task.project_id)
                          .then(server_responce => {
                              if (server_responce.result == "Ok")
                              {
                                 this.getTasksForToday()
+                                this.reloadMessages()
                              }
                              else {
                                  this.error_message = server_responce.error;
@@ -151,6 +161,7 @@ export class TasksComponent implements OnInit {
                                      if (server_responce.result == "Ok")
                                      {
                                         this.getTasksForToday()
+                                        this.reloadMessages()
                                      }
                                      else {
                                         this.error_message = server_responce.error;
@@ -165,6 +176,7 @@ export class TasksComponent implements OnInit {
                                              if (server_responce.result == "Ok")
                                              {
                                                 this.getTasksForToday()
+                                                this.reloadMessages()
                                                 this.showCreate = false;
                                              }
                                              else {
@@ -196,6 +208,10 @@ export class TasksComponent implements OnInit {
 
     ShowCreate(): void{
         this.showCreate = true;
+    }
+
+    Cancel(): void {
+        this.showCreate = false;
     }
 
     editTask(task: Task): void {
