@@ -1,4 +1,4 @@
-
+// Project class that provides attributes
 export class Project{
     result: string;
 

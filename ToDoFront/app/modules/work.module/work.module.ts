@@ -1,4 +1,4 @@
-// Module that governs user sign in, sign up, password restoration
+// Work module - main page with project and tasks overview and managment
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';

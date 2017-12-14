@@ -1,4 +1,4 @@
-// Component that responseble for signing user up
+// Component that responsable for combining projects and tasks
 
 import { Component } from "@angular/core";
 

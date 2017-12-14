@@ -1,4 +1,4 @@
-// Component that responseble for signing user up
+// Component that responsable for project managment
 
 import { Component, Input} from "@angular/core";
 import { JWTAuthService } from "../../../../services/jwt-auth.service"
